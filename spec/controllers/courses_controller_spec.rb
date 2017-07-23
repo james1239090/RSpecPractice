@@ -58,7 +58,7 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe 'Post Create' do
-    context 'when course does not have a title' do
+    context 'when course does not have title' do
       it 'dose not create a record' do
 
         expect do
@@ -109,26 +109,44 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe 'PUT Update' do
-    it 'assign @course' do
-      course = create(:course)
+    context 'when course does not have title' do
+      it 'does not update a record' do
+        course = create(:course)
+        put :update, params: { id: course.id, course: { title: "", description: "Description" } }
 
-      put :update, params: { id: course.id, course: { title: "Title", description: "Description" } }
-      expect(assigns[:course]).to eq(course)
+        expect(course.description).not_to eq("Description")
+      end
+
+      it 'render edit template' do
+        course = create(:course)
+        put :update, params: { id: course.id, course: { title: "", description: "Description" } }
+
+        expect(response).to render_template("edit")
+      end
     end
 
-    it 'change value' do
-      course = create(:course)
-      put :update, params: { id: course.id, course: { title: "Title", description: "Description" } }
+    context 'when course has title' do
+      it 'assign @course' do
+        course = create(:course)
 
-      expect(assigns[:course].title).to eq("Title")
-      expect(assigns[:course].description).to eq("Description")
-    end
+        put :update, params: { id: course.id, course: { title: "Title", description: "Description" } }
+        expect(assigns[:course]).to eq(course)
+      end
 
-    it 'redirect_to course_path' do
-      course = create(:course)
-      put :update, params: { id: course.id, course: { title: "Titile", description: "Description" } }
+      it 'change value' do
+        course = create(:course)
+        put :update, params: { id: course.id, course: { title: "Title", description: "Description" } }
 
-      expect(response).to redirect_to course_path(course)
+        expect(assigns[:course].title).to eq("Title")
+        expect(assigns[:course].description).to eq("Description")
+      end
+
+      it 'redirect_to course_path' do
+        course = create(:course)
+        put :update, params: { id: course.id, course: { title: "Titile", description: "Description" } }
+
+        expect(response).to redirect_to course_path(course)
+      end
     end
   end
 

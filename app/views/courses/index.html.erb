@@ -12,7 +12,7 @@
       <% @courses.each do |course| %>
         <tr>
           <td><%= course.id %></td>
-          <td><%= link_to(course.title, course_path(course) %></td>
+          <td><%= link_to(course.title, course_path(course)) %></td>
           <td><%= course.description %></td>
           <td>
             <%= link_to("Edit", edit_course_path(course), class: "btn btn-xs") %>

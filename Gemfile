@@ -41,6 +41,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5.2'
   gem "rails-controller-testing", "~> 1.0.1"
   gem "factory_girl_rails", "~> 4.7.0"
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 
 end
 

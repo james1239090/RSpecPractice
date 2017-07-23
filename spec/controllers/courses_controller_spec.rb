@@ -38,4 +38,22 @@ RSpec.describe CoursesController, type: :controller do
 
     end
   end
+
+  describe 'Get New' do
+    it 'assigns @course' do
+      course = build(:course)
+
+      get :new
+
+      expect(assigns[:course]).to be_a_new(Course)
+    end
+
+    it 'render template' do
+      course = build(:course)
+
+      get :new
+
+      expect(response).to render_template("new")
+    end
+  end
 end

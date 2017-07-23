@@ -74,8 +74,6 @@ RSpec.describe CoursesController, type: :controller do
 
       end
     end
-
-
     context 'when course has title' do
       it 'create a new course record ' do
         course = build(:course)
@@ -92,7 +90,23 @@ RSpec.describe CoursesController, type: :controller do
         expect(response).to redirect_to courses_path
       end
     end
-
-
   end
+
+  describe 'Get Edit' do
+    it 'assign coures' do
+      course = create(:course)
+      get :edit, params: { id: course.id }
+
+      expect(assigns[:course]).to eq(course)
+    end
+
+    it 'render temlpate' do
+      course = create(:course)
+      get :edit, params: { id: course.id }
+
+      expect(response).to render_template("edit")
+    end
+  end
+
+
 end

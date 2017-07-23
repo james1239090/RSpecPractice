@@ -150,4 +150,26 @@ RSpec.describe CoursesController, type: :controller do
     end
   end
 
+
+  describe 'DELETE destory' do
+    it 'assign @course' do
+      course = create(:coures)
+      delete :destory, params: { id: course.id }
+
+      expect(assigns[:course]).to eq(course)
+    end
+
+    it 'delete a record' do
+      course = create(:course)
+
+      expect { delete :destory, params: { id: course.id } }.to change { Course.count }.by(-1)
+    end
+
+    it 'redirect_to courses_path' do
+      course = create(:course)
+      delete :destory, params: { id: course.id }
+
+      expect(response).to redirect_to courses_path
+    end
+  end
 end

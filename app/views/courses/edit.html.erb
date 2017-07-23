@@ -1,0 +1,9 @@
+<div class="col-md-12">
+  <%= form_for @course do |f| %>
+    <%= f.text_field :title %>
+    <%= f.text_area :description %>
+    <div class="form-action">
+      <%= f.submit "Submit", disable_with: "Submitting..", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

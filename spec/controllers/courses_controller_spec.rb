@@ -140,9 +140,12 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe 'PUT Update' do
+    let(:user) { create(:user) }
+    let(:course) { create(:course) }
+
     context 'when course does not have title' do
-      let(:course) { create(:course) }
       before do
+        sign_in user
         put :update, params: { id: course.id, course: { title: "", description: "Description" } }
       end
       it 'does not update a record' do
@@ -155,8 +158,8 @@ RSpec.describe CoursesController, type: :controller do
     end
 
     context 'when course has title' do
-      let(:course) { create(:course) }
       before do
+        sign_in user
         put :update, params: { id: course.id, course: { title: "Title", description: "Description" } }
       end
       it 'assign @course' do

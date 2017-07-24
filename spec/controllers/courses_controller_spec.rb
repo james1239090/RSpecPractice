@@ -93,6 +93,10 @@ RSpec.describe CoursesController, type: :controller do
         expect(response).to redirect_to courses_path
       end
 
+      it 'create a course for user' do
+        post :create, params: { course: attributes_for(:course) }
+        expect(Course.last.user).to eq(user)
+      end
     end
 
   end

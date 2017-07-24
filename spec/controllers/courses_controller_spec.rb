@@ -61,6 +61,8 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe 'Post Create' do
+    let(:user) { create(:user) }
+    before { sign_in user }
     context 'when course does not have title' do
       it 'dose not create a record' do
 

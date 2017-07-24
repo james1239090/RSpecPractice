@@ -92,7 +92,9 @@ RSpec.describe CoursesController, type: :controller do
         post :create, params: { course: attributes_for(:course) }
         expect(response).to redirect_to courses_path
       end
+
     end
+
   end
 
   describe 'Get Edit' do

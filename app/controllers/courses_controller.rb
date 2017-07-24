@@ -28,7 +28,7 @@ class CoursesController < ApplicationController
   end
 
   def update
-    @course = Course.find(params[:id])
+    @course = current_user.courses.find(params[:id])
     if @course.update(course_params)
       redirect_to course_path(@course)
     else
